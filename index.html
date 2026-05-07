@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Westwoodfired Bakery – Für jeden einen Platz am Feuer</title>
+  <meta name="description" content="Handgemachte Galettes aus Buchweizen, Holzofengebäck und Specialty Coffee. Mobiler Food Truck auf Wochen- und Mittelaltermärkten in Niedersachsen.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ── Custom Properties ─────────────────────────────── */
+    :root {
+      --waldgruen:    #2D5218;
+      --waldgruen-dk: #1e3a10;
+      --schwarz:      #1A1A1A;
+      --pergament:    #F2E8C6;
+      --pergament-dk: #e8d9a8;
+      --naturholz:    #8B6914;
+      --asche:        #4A4A4A;
+
+      --font-serif: 'Lora', Georgia, serif;
+      --font-sans:  'Source Sans 3', system-ui, sans-serif;
+
+      --space-xs:  0.5rem;
+      --space-s:   1rem;
+      --space-m:   1.5rem;
+      --space-l:   2.5rem;
+      --space-xl:  4rem;
+
+      --max-w: 68rem;
+      --radius: 2px;
+    }
+
+    /* ── Reset & Base ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 100%; }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: var(--schwarz);
+      background-color: var(--pergament);
+    }
+
+    img { display: block; max-width: 100%; }
+
+    a { color: inherit; }
+
+    /* ── Typography ────────────────────────────────────── */
+    h1, h2, h3 {
+      font-family: var(--font-serif);
+      line-height: 1.2;
+      color: var(--waldgruen-dk);
+    }
+
+    h1 { font-size: clamp(2rem, 6vw, 3.25rem); font-weight: 600; }
+    h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 600; }
+    h3 { font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 400; font-style: italic; }
+
+    p { max-width: 65ch; }
+
+    /* ── Layout helpers ────────────────────────────────── */
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: var(--space-m);
+    }
+
+    section { padding-block: var(--space-xl); }
+
+    /* ── Ornament divider ──────────────────────────────── */
+    .ornament {
+      display: block;
+      text-align: center;
+      color: var(--naturholz);
+      letter-spacing: 0.4em;
+      font-size: 0.75rem;
+      margin-block: var(--space-m);
+      opacity: 0.6;
+    }
+
+    /* ── HEADER / NAV ──────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--waldgruen);
+      border-bottom: 3px solid var(--naturholz);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding: var(--space-s) var(--space-m);
+    }
+
+    nav > a {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img {
+      height: 52px;
+      width: auto;
+      display: block;
+      /* schwarz → Pergamentton auf grünem Hintergrund */
+      filter: brightness(0) invert(1) sepia(1) saturate(0.4) hue-rotate(2deg);
+      transition: opacity 0.2s;
+    }
+
+    .nav-logo:hover img { opacity: 0.82; }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-s);
+    }
+
+    nav ul a {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--pergament);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    nav ul a:hover {
+      color: var(--pergament-dk);
+      border-bottom-color: var(--naturholz);
+    }
+
+    /* ── HERO ──────────────────────────────────────────── */
+    #hero {
+      background-color: var(--waldgruen);
+      background-image:
+        radial-gradient(ellipse at 20% 80%, rgba(139,105,20,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(30,58,16,0.5) 0%, transparent 55%);
+      color: var(--pergament);
+      padding-block: var(--space-xl) calc(var(--space-xl) * 1.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--naturholz) 0px,
+        var(--naturholz) 18px,
+        transparent 18px,
+        transparent 24px
+      );
+      opacity: 0.55;
+    }
+
+    #hero .container { display: flex; flex-direction: column; gap: var(--space-m); }
+
+    .hero-logo {
+      width: min(220px, 55vw);
+      height: auto;
+      filter: brightness(0) invert(1) sepia(1) saturate(0.4) hue-rotate(2deg);
+      opacity: 0.92;
+    }
+
+    #hero h1 { color: var(--pergament); max-width: 18ch; }
+
+    #hero > .container > p {
+      color: rgba(242,232,198,0.88);
+      font-size: 1.1rem;
+      max-width: 52ch;
+    }
+
+    #hero small {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: rgba(242,232,198,0.6);
+      border-left: 2px solid var(--naturholz);
+      padding-left: var(--space-xs);
+      font-style: italic;
+    }
+
+    /* CTA button */
+    #hero a {
+      display: inline-block;
+      align-self: flex-start;
+      background-color: var(--naturholz);
+      color: var(--pergament);
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.75rem 1.75rem;
+      border: 1px solid rgba(242,232,198,0.25);
+      border-radius: var(--radius);
+      transition: background-color 0.2s, transform 0.15s;
+    }
+
+    #hero a:hover {
+      background-color: #a07a1a;
+      transform: translateY(-1px);
+    }
+
+    /* ── PRODUKTE ──────────────────────────────────────── */
+    #produkte { background-color: var(--pergament); }
+
+    #produkte > .container > h2 { margin-bottom: var(--space-xs); }
+    #produkte > .container > p  { color: var(--asche); margin-bottom: var(--space-l); }
+
+    #produkte ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-m);
+      margin-bottom: var(--space-l);
+    }
+
+    #produkte article {
+      background-color: #fff9ee;
+      border: 1px solid var(--pergament-dk);
+      border-top: 3px solid var(--waldgruen);
+      border-radius: var(--radius);
+      padding: var(--space-m);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    #produkte article h3 { color: var(--waldgruen-dk); font-style: italic; }
+
+    #produkte article h3 span {
+      font-style: normal;
+      font-size: 0.8em;
+      color: var(--asche);
+      font-family: var(--font-sans);
+    }
+
+    #produkte article p { color: var(--asche); font-size: 0.95rem; }
+
+    #produkte article strong {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--naturholz);
+      margin-top: auto;
+    }
+
+    #produkte aside {
+      border: 1px solid var(--pergament-dk);
+      border-left: 3px solid var(--naturholz);
+      background-color: rgba(139,105,20,0.06);
+      padding: var(--space-s) var(--space-m);
+      border-radius: var(--radius);
+    }
+
+    #produkte aside p {
+      font-size: 0.85rem;
+      color: var(--asche);
+      font-style: italic;
+      max-width: 70ch;
+    }
+
+    /* ── MÄRKTE ────────────────────────────────────────── */
+    #maerkte {
+      background-color: var(--waldgruen-dk);
+      color: var(--pergament);
+    }
+
+    #maerkte h2 { color: var(--pergament); margin-bottom: var(--space-xs); }
+
+    #maerkte > .container > p { color: rgba(242,232,198,0.75); margin-bottom: var(--space-l); }
+
+    #maerkte h3 {
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--naturholz);
+      margin-bottom: var(--space-xs);
+    }
+
+    #maerkte ul {
+      list-style: none;
+      margin-bottom: var(--space-l);
+    }
+
+    #maerkte li {
+      padding-block: 0.4rem;
+      border-bottom: 1px solid rgba(242,232,198,0.1);
+      color: rgba(242,232,198,0.9);
+      font-size: 1rem;
+    }
+
+    #maerkte li::before {
+      content: '— ';
+      color: var(--naturholz);
+    }
+
+    #maerkte > .container > p:last-child {
+      color: rgba(242,232,198,0.65);
+      font-size: 0.9rem;
+      margin-top: var(--space-s);
+    }
+
+    #maerkte a {
+      color: var(--pergament-dk);
+      text-underline-offset: 3px;
+    }
+
+    #maerkte a:hover { color: var(--naturholz); }
+
+    /* ── ÜBER UNS ──────────────────────────────────────── */
+    #ueber-uns { background-color: var(--pergament-dk); }
+
+    #ueber-uns h2 { margin-bottom: var(--space-m); }
+
+    #ueber-uns p {
+      color: var(--asche);
+      margin-bottom: var(--space-s);
+    }
+
+    /* ── FOOTER ────────────────────────────────────────── */
+    footer {
+      background-color: var(--schwarz);
+      color: rgba(242,232,198,0.7);
+      padding-block: var(--space-xl);
+    }
+
+    footer .container {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-l);
+    }
+
+    footer h2 {
+      font-family: var(--font-serif);
+      color: var(--pergament);
+      font-size: 1.5rem;
+      margin-bottom: var(--space-s);
+    }
+
+    footer h3 {
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--naturholz);
+      margin-bottom: var(--space-xs);
+    }
+
+    footer address { font-style: normal; }
+    footer address p { margin-bottom: 0.25rem; font-size: 0.95rem; }
+
+    footer a {
+      color: var(--pergament-dk);
+      text-underline-offset: 3px;
+    }
+
+    footer a:hover { color: var(--naturholz); }
+
+    footer p.legal {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: rgba(242,232,198,0.45);
+    }
+
+    footer > .container > p:last-child {
+      font-size: 0.78rem;
+      color: rgba(242,232,198,0.3);
+      text-align: center;
+      padding-top: var(--space-m);
+      border-top: 1px solid rgba(242,232,198,0.1);
+    }
+
+    /* ── RESPONSIVE: Tablet ≥ 640px ────────────────────── */
+    @media (min-width: 640px) {
+      #produkte ul {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      footer .container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      footer section { flex: 1 1 200px; }
+    }
+
+    /* ── RESPONSIVE: Desktop ≥ 960px ───────────────────── */
+    @media (min-width: 960px) {
+      #produkte ul {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      #hero .container {
+        max-width: 52rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <header>
+    <nav aria-label="Hauptnavigation">
+      <a href="#" class="nav-logo" aria-label="Westwoodfired Bakery – Startseite">
+        <img src="Westwoodfired Bakery PNG.png" alt="Westwoodfired Bakery Logo" height="52">
+      </a>
+      <ul>
+        <li><a href="#produkte">Produkte</a></li>
+        <li><a href="#maerkte">Märkte</a></li>
+        <li><a href="#ueber-uns">Über uns</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section id="hero" aria-labelledby="hero-headline">
+      <div class="container">
+        <img src="Westwoodfired Bakery PNG.png" alt="" class="hero-logo" aria-hidden="true">
+        <h1 id="hero-headline">Für jeden einen Platz am Feuer</h1>
+        <p>
+          Bretonische Galettes aus Buchweizen. Holzofengebäck aus dem Gusseisen.
+          Specialty Coffee vom Siebträger. Direkt vom VW T3 auf dem Markt.
+        </p>
+        <p>
+          <small>Von Natur aus weizen- und maisfrei — das Originalrezept ist einfach so.</small>
+        </p>
+        <a href="#maerkte">Wo du uns findest</a>
+      </div>
+    </section>
+
+    <!-- ===================== PRODUKTE ===================== -->
+    <section id="produkte" aria-labelledby="produkte-headline">
+      <div class="container">
+        <h2 id="produkte-headline">Unsere Produkte</h2>
+        <p>Handgemacht. Im Gusseisen direkt aus dem Holzofen.</p>
+
+        <ul>
+
+          <li>
+            <article>
+              <h3>Galette <span>(herzhaft)</span></h3>
+              <p>
+                Buchweizen &amp; Wasser — bretonisches Originalrezept, naturell glutenfrei.
+                Gebacken mit Holzofenfinish, frisch belegt.
+              </p>
+              <p><strong>8,00 €</strong></p>
+            </article>
+          </li>
+
+          <li>
+            <article>
+              <h3>Crêpe <span>(süß)</span></h3>
+              <p>
+                Teig aus Reis, Tapioka und Kartoffelstärke — weizen- und maisfrei.
+                Holzofenfinish, süß belegt.
+              </p>
+              <p><strong>7,00 €</strong></p>
+            </article>
+          </li>
+
+          <li>
+            <article>
+              <h3>Apfelpfannkuchen</h3>
+              <p>
+                16 cm Gusseisenpfanne, direkt im Holzofen gebacken.
+                Mit karamellisiertem Zimt-Zucker.
+              </p>
+              <p><strong>6,50 €</strong></p>
+            </article>
+          </li>
+
+          <li>
+            <article>
+              <h3>Specialty Coffee</h3>
+              <p>
+                Espresso und Milchgetränke vom WPM Primus Siebträger.
+                Frisch gemahlen mit der WPM ZD-19SG Mühle.
+              </p>
+              <p><strong>2,50 – 3,50 €</strong></p>
+            </article>
+          </li>
+
+        </ul>
+
+        <aside aria-label="Allergenhinweis">
+          <p>
+            Alle Teige sind von Natur aus weizen- und maisfrei.
+            Zubereitung in einer Küche ohne Weizenmehl.
+            Bei schwerer Zöliakie bitte ansprechen.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===================== MÄRKTE ===================== -->
+    <section id="maerkte" aria-labelledby="maerkte-headline">
+      <div class="container">
+        <h2 id="maerkte-headline">Wo du uns findest</h2>
+        <p>Ab Juli 2026 auf Wochen- und Mittelaltermärkten in Niedersachsen.</p>
+
+        <h3>Wochenmärkte</h3>
+        <ul>
+          <li>Hannover – Moltkeplatz</li>
+          <li>Hannover – Stephansplatz</li>
+          <li>Hannover-List</li>
+          <li>Hildesheim – Marktplatz</li>
+        </ul>
+
+        <h3>Mittelaltermärkte</h3>
+        <ul>
+          <li>Braunschweig – Kennelbad</li>
+          <li>Heldenburg Einbeck-Salzderhelden</li>
+        </ul>
+
+        <p>
+          Aktuelle Termine immer auf
+          <a href="https://www.instagram.com/" rel="noopener noreferrer" target="_blank">Instagram</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== ÜBER UNS ===================== -->
+    <section id="ueber-uns" aria-labelledby="ueber-uns-headline">
+      <div class="container">
+        <h2 id="ueber-uns-headline">Über uns</h2>
+        <p>
+          Westwoodfired Bakery ist ein mobiles Holzofen-Konzept aus Peine, Niedersachsen.
+          Wir backen bretonische Galettes und Holzofengebäck im Gusseisen —
+          handwerklich, direkt am Feuer.
+        </p>
+        <p>
+          Unser Ofen: ein Gozney Dome auf Schwerlast-Auszug im Heck unseres
+          waldgrünen VW T3. Gasunterstützt oder mit echtem Holz — bis 430 °C.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== KONTAKT & FOOTER ===================== -->
+  <footer>
+    <div class="container">
+      <section id="kontakt" aria-labelledby="kontakt-headline">
+        <h2 id="kontakt-headline">Kontakt</h2>
+        <address>
+          <p>Westwoodfired Bakery</p>
+          <p>Inhaber: Familie Westwood</p>
+          <p>Peine, Niedersachsen</p>
+          <p>
+            <a href="https://www.instagram.com/" rel="noopener noreferrer" target="_blank">
+              Instagram
+            </a>
+          </p>
+        </address>
+      </section>
+
+      <section aria-label="Rechtliches">
+        <h3>Impressum</h3>
+        <p class="legal">
+          Westwoodfired Bakery · Inhaber: Familie Westwood · Peine, Niedersachsen<br>
+          Steuernummer: wird nach Finanzamt-Anmeldung eingetragen<br>
+          Verantwortlich für den Inhalt: [Vorname Nachname]
+        </p>
+      </section>
+
+      <p><small>&copy; 2026 Westwoodfired Bakery. Alle Rechte vorbehalten.</small></p>
+    </div>
+  </footer>
+
+</body>
+</html>
