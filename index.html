@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
@@ -113,8 +113,7 @@
       height: 52px;
       width: auto;
       display: block;
-      /* schwarz → Pergamentton auf grünem Hintergrund */
-      filter: brightness(0) invert(1) sepia(1) saturate(0.4) hue-rotate(2deg);
+      /* weißes Logo auf grünem Hintergrund: invert + screen-blend */
       transition: opacity 0.2s;
     }
 
@@ -175,10 +174,10 @@
     #hero .container { display: flex; flex-direction: column; gap: var(--space-m); }
 
     .hero-logo {
-      width: min(220px, 55vw);
+      width: min(440px, 90vw);
       height: auto;
-      filter: brightness(0) invert(1) sepia(1) saturate(0.4) hue-rotate(2deg);
       opacity: 0.92;
+      align-self: center;
     }
 
     #hero h1 { color: var(--pergament); max-width: 18ch; }
@@ -429,7 +428,7 @@
   <header>
     <nav aria-label="Hauptnavigation">
       <a href="#" class="nav-logo" aria-label="Westwoodfired Bakery – Startseite">
-        <img src="logo.png" alt="Westwoodfired Bakery Logo" height="52">
+        <img src="logo.png?v=3" alt="Westwoodfired Bakery Logo" height="52">
       </a>
       <ul>
         <li><a href="#produkte">Produkte</a></li>
@@ -445,7 +444,7 @@
     <!-- ===================== HERO ===================== -->
     <section id="hero" aria-labelledby="hero-headline">
       <div class="container">
-        <img src="logo.png" alt="" class="hero-logo" aria-hidden="true">
+        <img src="logo.png?v=3" alt="" class="hero-logo" aria-hidden="true">
         <h1 id="hero-headline">Für jeden einen Platz am Feuer</h1>
         <p>
           Bretonische Galettes aus Buchweizen. Holzofengebäck aus dem Gusseisen.
